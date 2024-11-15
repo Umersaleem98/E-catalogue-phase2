@@ -119,4 +119,11 @@ Route::get('adoped_students', [DashboardAdopedStudentsController::class, 'adoped
 Route::get('event_list', [EventController::class, 'index']);
 Route::get('event_create', [EventController::class, 'create']);
 Route::post('event_create', [EventController::class, 'store']);
+Route::get('event_edit/{id}', [EventController::class, 'edit']);
+Route::post('event_update/{id}', [EventController::class, 'update']);
 Route::get('event_delete/{id}', [EventController::class, 'delete']);
+
+
+Route::get('event-details/{id}', [EventController::class, 'sinlge_event']);
+
+

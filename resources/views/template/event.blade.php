@@ -22,39 +22,38 @@
         </div>
 
         <div class="event_items">
-
-            <!-- Event Item -->
             @foreach ($events as $item)
-            <div class="row event_item ">
-                <div class="col">
-                    <div class="row d-flex flex-row align-items-end boardered" >
+                <!-- Check if event date is in the future -->
+                @if (\Carbon\Carbon::parse($item->date)->isFuture())
+                    <div class="row event_item">
+                        <div class="col">
+                            <div class="row d-flex flex-row align-items-end bordered">
+                                <div class="col-lg-2 order-lg-1 order-2">
+                                    <div class="event_date d-flex flex-column align-items-center justify-content-center">
+                                        <h2 class="event-date text-dark">{{ $item->date }}</h2>
+                                    </div>
+                                </div>
 
-                        <div class="col-lg-2 order-lg-1 order-2">
-                            <div class="event_date d-flex flex-column align-items-center justify-content-center">
-                                <h2 class="event-date text-dark">{{$item->date}}</h2>
+                                <div class="col-lg-6 order-lg-2 order-3">
+                                    <div class="event_content">
+                                        <div class="event_name">
+                                            <a class="trans_200" href="{{ url('event-details', ['id' => $item->id]) }}">{{ $item->event_title }}</a>
+                                        </div>
+                                        <div class="event_location">{{ $item->subtitle }}</div>
+                                        <p class="event_location text-dark">{{ Str::limit($item->description, 150) }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 order-lg-3 order-1">
+                                    <div class="event_image">
+                                        <img src="{{ asset('events/' . $item->images) }}" class="img-fluid mb-3" alt="{{ $item->images }} Image" style="max-height: 220px; width:100%">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6 order-lg-2 order-3">
-                            <div class="event_content">
-                                <div class="event_name"><a class="trans_200" href="#">{{$item->event_title}}</a></div>
-                                <div class="event_location">{{$item->subtitle}}</div>
-                                <p>{{$item->description }}</p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 order-lg-3 order-1">
-                            <div class="event_image">
-                                <img src="{{ asset('events/' . $item->images) }}" class="img-fluid mb-3" alt="{{ $item->images }} Image" style="max-height: 220px; width:100%">
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-            </div>
+                @endif
             @endforeach
-
         </div>
-
     </div>
 </div>
